@@ -151,7 +151,9 @@ pwa:
 paginate: 10
 
 # The base URL of your site
-baseurl: ""
+# For project page deployment, set baseurl to your repository path.
+# Example: /DSO101_ss26_Learnings
+baseurl: "/DSO101_ss26_Learnings"
 
 # ------------ The following options are not recommended to be modified ------------------
 
@@ -225,4 +227,3 @@ jekyll-archives:
   permalinks:
     tag: /tags/:name/
     category: /categories/:name/
-
