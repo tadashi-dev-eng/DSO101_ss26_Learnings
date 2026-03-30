@@ -38,6 +38,12 @@ jobs:
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v5
+        with:
+          enablement: true
+
+      - name: Debug Pages output
+        run: |
+          echo "pages.base_path=${{ steps.pages.outputs.base_path }}"
 
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
@@ -52,9 +58,9 @@ jobs:
 
       - name: Test site
         run: |
-          bundle exec htmlproofer _site \
-            \-\-disable-external \
-            \-\-ignore-urls "/^http:\/\/127.0.0.1/,/^http:\/\/0.0.0.0/,/^http:\/\/localhost/"
+          bundle exec htmlproofer "_site${{ steps.pages.outputs.base_path }}" \
+            --disable-external \
+            --ignore-urls "/^http:\/\/127.0.0.1/,/^http:\/\/0.0.0.0/,/^http:\/\/localhost/"
 
       - name: Upload site artifact
         uses: actions/upload-pages-artifact@v4
@@ -71,5 +77,3 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-
-        
